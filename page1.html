@@ -52,7 +52,7 @@ Jagdeep Singh, about, Personal branding
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true"><li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="#top">Home</a></li>
-                    <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="index.html#image1-b">Experience</a></li><li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="index.html#gallery5-3">My Work</a></li></ul>
+                    <li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="index.html#image1-b">Experience</a></li><li class="nav-item"><a class="nav-link link text-black text-primary display-4" href="index.html#features3-3">My Work</a></li></ul>
                 
                 <div class="navbar-buttons mbr-section-btn"><a class="btn btn-secondary display-4" href="index.html#contacts2-8">
                         Contact</a></div>
@@ -125,12 +125,87 @@ Jagdeep Singh, about, Personal branding
                 <h3 class="mbr-section-title mbr-fonts-style align-center mb-4 display-2">
                     <strong>How to create your own bots.</strong></h3>
                 <h4 class="mbr-section-subtitle align-center mbr-fonts-style mb-4 display-7">
-                    I have Used Java and Spring boot to create these bots. Spring boot is not compulsory but it makes it slightly easier.<br><br>So, The first thing to do is to use the Bot Father bot provided by the Telegram official.<br>Link to Official BotFather -&gt;&nbsp;<br>Link to Official Documentation -&gt;</h4>
+                    I have Used Java and Spring boot to create these bots. Spring boot is not compulsory but it makes it slightly easier.<br><br><strong>Telegram</strong> is a popular messaging platform known for its security and rich set of features. Telegram Bots allow developers to interact with users on the platform programmatically, providing a seamless and automated experience. In this tutorial, we will walk through the process of creating a Telegram bot using Java and Spring Boot, allowing you to harness the power of both technologies to build a functional and interactive bot.<br><strong>Link to Official BotFather -&gt;&nbsp;<br>Link to Official Documentation -&gt;</strong><br><br><strong>Prerequisites
+</strong><div>Before we start, make sure you have the following installed on your system:
+</div><div>1. Java Development Kit (JDK) 8 or higher
+</div><div>2. IntelliJ IDEA or any other preferred IDE
+</div><div>3. Maven or Gradle for dependency management
+</div><div>4. Telegram account</div><strong><br></strong><div><strong>Setting Up the Telegram Bot</strong></div><br><div><strong>
+</strong></div><div><strong>1.Create a Telegram Bot: </strong></div><div>To create a bot on Telegram, you need to interact with the "BotFather" on the Telegram platform. Open Telegram and search for "BotFather" in the search bar. Start a chat with BotFather and use the /newbot command to create a new bot. Follow the instructions provided by BotFather to choose a name and username for your bot. Once created, BotFather will provide you with a unique API token. Save this token as we will use it later to interact with our bot programmatically.</div><br><div>
+</div><div><strong>2.Set Up the Spring Boot Project:</strong> </div><div>Open your preferred IDE and create a new Spring Boot project. You can either use the Spring Initializr (https://start.spring.io/) or create the project from scratch. Make sure to include the required dependencies for Spring Web and Telegram Bots.</div><br><div>
+</div><div><strong>3.Add Dependencies:</strong></div><div>If you are using Maven, add the following dependencies to your pom.xml file:</div><br><div><em>&lt;dependency&gt;
+</em></div><div><em>&nbsp; &nbsp; &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+</em></div><div><em>&nbsp; &nbsp; &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+</em></div><div><em>&lt;/dependency&gt;
+</em></div><div><em>&lt;dependency&gt;
+</em></div><div><em>&nbsp; &nbsp; &lt;groupId&gt;org.telegram&lt;/groupId&gt;
+</em></div><div><em>&nbsp; &nbsp; &lt;artifactId&gt;telegrambots&lt;/artifactId&gt;
+</em></div><div><em>&nbsp; &nbsp; &lt;version&gt;5.2.0&lt;/version&gt;
+</em></div><div><em>&lt;/dependency&gt;
+</em></div><div><br></div><br><br><div>If you are using Gradle, add the following dependencies to your build.gradle file:</div><br><div><em>implementation 'org.springframework.boot:spring-boot-starter-web'
+</em></div><div><em>implementation 'org.telegram:telegrambots:5.2.0'
+</em></div><div><br></div><br><br><strong>1. Create the Telegram Bot Class:</strong> In your project, create a new Java class for your Telegram bot. For example, name it MyTelegramBot. This class will extend the TelegramLongPollingBot class provided by the Telegram Bots library. Implement the required methods, including getBotUsername(), getBotToken(), and onUpdateReceived(Update update).<br><br><br><div><em>import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+</em></div><div><em>import org.telegram.telegrambots.meta.api.objects.Update;
+</em></div><div><em>import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+</em></div><div><em>public class MyTelegramBot extends TelegramLongPollingBot {
+</em></div><div><em>&nbsp; &nbsp; @Override
+</em></div><div><em>&nbsp; &nbsp; public String getBotUsername() {
+</em></div><div><em>&nbsp; &nbsp; &nbsp; &nbsp; // Return the username you set for your bot during creation
+</em></div><div><em>&nbsp; &nbsp; &nbsp; &nbsp; return "YourBotUsername";
+</em></div><div><em>&nbsp; &nbsp; }
+</em></div><div><em>&nbsp; &nbsp; @Override
+</em></div><div><em>&nbsp; &nbsp; public String getBotToken() {
+</em></div><div><em>&nbsp; &nbsp; &nbsp; &nbsp; // Return the API token provided by BotFather
+</em></div><div><em>&nbsp; &nbsp; &nbsp; &nbsp; return "YourBotToken";
+</em></div><div><em>&nbsp; &nbsp; }
+</em></div><div><em>&nbsp; &nbsp; @Override
+</em></div><div><em>&nbsp; &nbsp; public void onUpdateReceived(Update update) {
+</em></div><div><em>&nbsp; &nbsp; &nbsp; &nbsp; // Handle incoming updates and respond accordingly
+</em></div><div><em>&nbsp; &nbsp; &nbsp; &nbsp; // For example, you can access the user's message using update.getMessage().getText()
+</em></div><div><em>&nbsp; &nbsp; &nbsp; &nbsp; // and send a response using execute(SendMessage message)
+</em></div><div><em>&nbsp; &nbsp; &nbsp; &nbsp; // Don't forget to handle any exceptions that might occur during the process
+</em></div><div><em>&nbsp; &nbsp; }
+</em></div><div><em>}
+</em></div><div><br></div><br><br><div><strong>2. Create a Controller: </strong>In Spring Boot, create a controller class to handle incoming HTTP requests from Telegram. This controller will process updates and forward them to the MyTelegramBot class.</div><br><br><div><em>import org.springframework.web.bind.annotation.PostMapping;
+</em></div><div><em>import org.springframework.web.bind.annotation.RequestBody;
+</em></div><div><em>import org.springframework.web.bind.annotation.RestController;
+</em></div><div><em>import org.telegram.telegrambots.meta.api.objects.Update;
+</em></div><div><em>@RestController
+</em></div><div><em>public class TelegramBotController {
+</em></div><div><em>&nbsp; &nbsp; private final MyTelegramBot telegramBot;
+</em></div><div><em>&nbsp; &nbsp; public TelegramBotController(MyTelegramBot telegramBot) {
+</em></div><div><em>&nbsp; &nbsp; &nbsp; &nbsp; this.telegramBot = telegramBot;
+</em></div><div><em>&nbsp; &nbsp; }
+</em></div><div><em>&nbsp; &nbsp; @PostMapping("/webhook")
+</em></div><div><em>&nbsp; &nbsp; public void onUpdateReceived(@RequestBody Update update) {
+</em></div><div><em>&nbsp; &nbsp; &nbsp; &nbsp; telegramBot.onUpdateReceived(update);
+</em></div><div><em>&nbsp; &nbsp; }
+</em></div><div><em>}</em></div><br><br><div><em>
+</em></div><div><strong>3.Configure the Bot:</strong> Open your application.properties file and add the following configuration to set up the Telegram webhook:</div><br><div><em># Replace &lt;your-bot-username&gt; with the username you set for your bot during creation
+</em></div><div><em>telegram.bot.username=&lt;your-bot-username&gt;
+</em></div><div><em># Replace &lt;your-bot-token&gt; with the API token provided by BotFather
+</em></div><div><em>telegram.bot.token=&lt;your-bot-token&gt;
+</em></div><div><br></div><br><br><div><strong>4.Deploy the Bot: </strong>Deploy your Spring Boot application to a server or cloud platform. Make sure your server is accessible over HTTPS as Telegram requires webhooks to be served over a secure connection.</div><br><div><strong>5.Set the Webhook URL:</strong> Set the webhook URL for your Telegram bot using the following API call or you can use the setWebhook method in the BotFather chat:</div><br><br><div><em>curl -F "url=https://your-server-url/webhook" "https://api.telegram.org/bot&lt;your-bot-token&gt;/setWebhook"
+</em></div><div><br></div><div>Make sure to replace your-server-url with the actual URL of your deployed Spring Boot application.</div><br><br><div><strong>Conclusion</strong></div><br><div>
+</div><div>Congratulations! You have successfully created a Telegram bot using Java and Spring Boot. Your bot is now ready to receive updates from Telegram users and respond accordingly. You can further enhance your bot's functionality by adding more logic to the onUpdateReceived method and implementing various Telegram Bot API features.
+</div><div>Remember to handle exceptions and errors properly, as well as secure sensitive data, such as the bot token, during production deployment. Happy bot building!</div><div>
+</div><div>
+</div><div>
+</div><div>
+</div><div>
+</div><div>
+</div><div>
+</div><div>
+</div><div>
+</div><div>
+</div><div>
+</div><div>
+</div></h4>
                 
             </div>
         </div>
     </div>
-</section><section style="background-color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif; color:#aaa; font-size:12px; padding: 0; align-items: center; display: flex;"><a href="https://mobirise.site/t" style="flex: 1 1; height: 3rem; padding-left: 1rem;"></a><p style="flex: 0 0 auto; margin:0; padding-right:1rem;">Mobirise free software - <a href="https://mobirise.site/p" style="color:#aaa;">See here</a></p></section><script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>  <script src="assets/smoothscroll/smooth-scroll.js"></script>  <script src="assets/ytplayer/index.js"></script>  <script src="assets/dropdown/js/navbar-dropdown.js"></script>  <script src="assets/theme/js/script.js"></script>  
+</section><section style="background-color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif; color:#aaa; font-size:12px; padding: 0; align-items: center; display: flex;"><a href="https://mobirise.site/t" style="flex: 1 1; height: 3rem; padding-left: 1rem;"></a><p style="flex: 0 0 auto; margin:0; padding-right:1rem;">Mobirise web page maker - <a href="https://mobirise.site/p" style="color:#aaa;">Click now</a></p></section><script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>  <script src="assets/smoothscroll/smooth-scroll.js"></script>  <script src="assets/ytplayer/index.js"></script>  <script src="assets/dropdown/js/navbar-dropdown.js"></script>  <script src="assets/theme/js/script.js"></script>  
   
   
   <input name="animation" type="hidden">
